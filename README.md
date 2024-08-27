@@ -1,50 +1,23 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## envirenment
 
-Currently, two official plugins are available:
+npm version - 10.2.4
+Node version - 20.11.1
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Task
 
-## Expanding the ESLint configuration
+Написать приложение используя React, которое может отрисовывать карточку для игры в лото.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Требования к интерфейсу:
 
-- Configure the top-level `parserOptions` property like this:
+- Внешний вид должен быть аналогичен приложенному изображению
+- Добавить возможность повторной генерации чисел в отрисованной карточке по нажатию кнопки
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Требования для формирования карточки:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Каждая карточка должна содержать уникальный набор чисел от 1 до 90.
+- Всего должно быть 3 ряда и 9 столбцов на каждой карточке.
+- В карточке должны быть заполнены случайным образом 15 чисел (по 5 в каждом ряду) из диапазона от 1 до 90, без повторений в
+  пределах карточки.
+- Каждый столбец должен содержать числа из определенного диапазона: 1-9 для первого столбца, 10-19 для второго и так далее.
