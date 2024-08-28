@@ -1,15 +1,19 @@
+:root {
+  --vh: 1vh;
+}
+
 body {
   overflow: hidden;
   width: 100vw;
-  height: 100vh;
+  height: calc(var(--vh) * 100);
 }
 
 main {
-  height: 90vh;
+  height: calc(var(--vh) * 90);
 }
 
 header {
-  height: 10vh;
+  height: calc(var(--vh) * 10);
   display: flex;
   align-items: center;
 }
