@@ -26,6 +26,8 @@ export default function lotoReducer(
           ? { ...el, value: generateUniqueArrays(existingHashes).arrays }
           : el
       );
+    case LotoReducerAction.CLEAR_ALL:
+      return [];
     default:
       return [...state];
   }
