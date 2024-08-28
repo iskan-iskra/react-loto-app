@@ -42,7 +42,7 @@ export default function AppLotoList() {
             <ButtonGroup>
               <Button onClick={addLotoItemHandler}>generate new loto</Button>
               <Button variant="warning" onClick={sortStateHandler}>
-                sort by id {isReverseSort ? "↑" : "↓"}
+                sort by id {isReverseSort ? "↓" : "↑"}
               </Button>
               <Button variant="danger" onClick={clearLotoListHandler}>
                 clear all
