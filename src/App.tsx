@@ -1,11 +1,18 @@
-import { AppButton, AppLotoCard } from "./components";
-
+import { useReducer } from "react";
+import { AppHeader, AppLotoList } from "./components";
+import { lotoReducer } from "./reducers";
+import { LotoContext } from "./context";
 export default function App() {
+  const [state, dispatch] = useReducer(lotoReducer, []);
+
   return (
     <>
-      <h1>hello world</h1>
-      <AppLotoCard />
-      <AppButton />
+      <LotoContext.Provider value={{ state, dispatch }}>
+        <AppHeader />
+        <main className="p-4 overflow-y-scroll">
+          <AppLotoList />
+        </main>
+      </LotoContext.Provider>
     </>
   );
 }
