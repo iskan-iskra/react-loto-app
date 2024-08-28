@@ -27,7 +27,7 @@ export default function AppLotoCard({
           </Stack>
         </Card.Header>
         <Card.Body>
-          <Table bordered striped hover>
+          <Table bordered>
             <tbody>
               {lotoItem?.value.map((el, index) => (
                 <tr key={index}>
