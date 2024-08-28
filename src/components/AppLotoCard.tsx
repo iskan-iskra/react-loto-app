@@ -15,21 +15,19 @@ export default function AppLotoCard({
   deleteLoto,
 }: TiAppLotoCardProps) {
   return (
-    <>
-      <Card>
-        <Card.Header>
-          <Stack direction="horizontal">
-            <div>{`Loto card with id: ${lotoItem?.id}`}</div>
-            <AppLotoTableActions
-              deleteLoto={deleteLoto}
-              regenerateLoto={regenerateLoto}
-            />
-          </Stack>
-        </Card.Header>
-        <Card.Body>
-          <AppLotoTable lotoTable={lotoItem?.value} />
-        </Card.Body>
-      </Card>
-    </>
+    <Card>
+      <Card.Header>
+        <Stack direction="horizontal">
+          <div>{`Loto card with id: ${lotoItem?.id}`}</div>
+          <AppLotoTableActions
+            deleteLoto={deleteLoto}
+            regenerateLoto={regenerateLoto}
+          />
+        </Stack>
+      </Card.Header>
+      <Card.Body>
+        <AppLotoTable lotoTable={lotoItem?.value} />
+      </Card.Body>
+    </Card>
   );
 }
