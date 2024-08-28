@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { AppHeader, AppLotoList } from "./components";
+import { AppHeader, AppLotoWidjet } from "./components";
 import { lotoReducer } from "./reducers";
 import { LotoContext } from "./context";
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
       <LotoContext.Provider value={{ state, dispatch }}>
         <AppHeader />
         <main className="p-4 overflow-y-scroll">
-          <AppLotoList />
+          <AppLotoWidjet />
         </main>
       </LotoContext.Provider>
     </>
