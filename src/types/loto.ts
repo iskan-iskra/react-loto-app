@@ -1,7 +1,10 @@
 import { Dispatch } from "react";
 import { LotoReducerAction } from "../consts";
 
-export type TiLotoReducerState = TiLotoList;
+export type TiLotoReducerState = {
+  items: TiLotoList;
+  existingHashes: Set<number>;
+};
 
 export type TiLotoReducerAction = {
   type: LotoReducerAction;

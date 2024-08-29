@@ -1,34 +1,51 @@
 import { LotoReducerAction } from "../consts";
-import { TiLotoReducerAction, TiLotoReducerState } from "../types";
+import { TiLotoReducerAction, TiLotoReducerState, TiLotoItem } from "../types";
 import { generateUniqueArrays } from "../tools";
-import { TiLotoItem } from "../types";
 
 export default function lotoReducer(
   state: TiLotoReducerState,
   action: TiLotoReducerAction
-) {
-  const existingHashes: Set<number> = new Set();
-
+): TiLotoReducerState {
   switch (action.type) {
-    case LotoReducerAction.ADD_ITEM:
-      return [
+    case LotoReducerAction.ADD_ITEM: {
+      const { arrays, hash } = generateUniqueArrays(state.existingHashes);
+      const newId = state.items.length
+        ? state.items[state.items.length - 1].id + 1
+        : 0;
+      const newItem: TiLotoItem = { id: newId, value: arrays };
+
+      return {
+        items: [...state.items, newItem],
+        existingHashes: new Set(state.existingHashes).add(hash),
+      };
+    }
+
+    case LotoReducerAction.DELETE_ITEM_BY_ID: {
+      return {
         ...state,
-        {
-          id: state.length ? state[state.length - 1].id + 1 : 0,
-          value: generateUniqueArrays(existingHashes).arrays,
-        } as TiLotoItem,
-      ];
-    case LotoReducerAction.DELETE_ITEM_BY_ID:
-      return state.filter((el) => el.id !== action.payload);
-    case LotoReducerAction.REGENERATE_ITEM_BY_ID:
-      return state.map((el) =>
-        el.id === action.payload
-          ? { ...el, value: generateUniqueArrays(existingHashes).arrays }
-          : el
+        items: state.items.filter((el) => el.id !== action.payload),
+      };
+    }
+
+    case LotoReducerAction.REGENERATE_ITEM_BY_ID: {
+      const { arrays, hash } = generateUniqueArrays(state.existingHashes);
+      const newItems = state.items.map((el) =>
+        el.id === action.payload ? { ...el, value: arrays } : el
       );
+
+      return {
+        items: newItems,
+        existingHashes: new Set(state.existingHashes).add(hash),
+      };
+    }
+
     case LotoReducerAction.CLEAR_ALL:
-      return [];
+      return {
+        items: [],
+        existingHashes: new Set<number>(),
+      };
+
     default:
-      return [...state];
+      return state;
   }
 }

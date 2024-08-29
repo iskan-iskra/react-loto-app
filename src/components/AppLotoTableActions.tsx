@@ -1,3 +1,4 @@
+import { FC, memo } from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
 
 type TiAppLotoTableActionsProps = {
@@ -5,11 +6,8 @@ type TiAppLotoTableActionsProps = {
   deleteLoto: () => void;
 };
 
-export default function AppLotoTableActions({
-  regenerateLoto,
-  deleteLoto,
-}: TiAppLotoTableActionsProps) {
-  return (
+const AppLotoTableActions: FC<TiAppLotoTableActionsProps> = memo(
+  ({ regenerateLoto, deleteLoto }) => (
     <ButtonGroup className="ms-auto">
       <Button variant="warning" onClick={regenerateLoto}>
         regenerate
@@ -18,5 +16,7 @@ export default function AppLotoTableActions({
         delete
       </Button>
     </ButtonGroup>
-  );
-}
+  )
+);
+
+export default AppLotoTableActions;

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import { LotoContext } from "../context";
 import { TiLotoReducer } from "../types";
 import { LotoReducerAction } from "../consts";
@@ -11,29 +11,35 @@ export default function AppLotoWidjet() {
 
   const [isReverseSort, setReverseSort] = useState<boolean>(false);
 
-  const [sortedState, setSortedState] = useState<TiLotoReducer["state"]>(state);
-
-  useEffect(() => {
-    if (isReverseSort) {
-      setSortedState([...state].sort((a, b) => a.id - b.id));
-    } else {
-      setSortedState([...state].sort((a, b) => b.id - a.id));
-    }
+  const sortedState = useMemo(() => {
+    return [...state.items].sort((a, b) =>
+      isReverseSort ? a.id - b.id : b.id - a.id
+    );
   }, [state, isReverseSort]);
 
-  const sortStateHandler = () => setReverseSort((v) => !v);
+  const sortStateHandler = useCallback(() => setReverseSort((v) => !v), []);
 
-  const addLotoItemHandler = () =>
+  const addLotoItemHandler = useCallback(() => {
     dispatch({ type: LotoReducerAction.ADD_ITEM });
+  }, [dispatch]);
 
-  const deleteLotoItemHandler = (id: number) => () =>
-    dispatch({ type: LotoReducerAction.DELETE_ITEM_BY_ID, payload: id });
+  const deleteLotoItemHandler = useCallback(
+    (id: number) => () => {
+      dispatch({ type: LotoReducerAction.DELETE_ITEM_BY_ID, payload: id });
+    },
+    [dispatch]
+  );
 
-  const regenerateLotoItemHandler = (id: number) => () =>
-    dispatch({ type: LotoReducerAction.REGENERATE_ITEM_BY_ID, payload: id });
+  const regenerateLotoItemHandler = useCallback(
+    (id: number) => () => {
+      dispatch({ type: LotoReducerAction.REGENERATE_ITEM_BY_ID, payload: id });
+    },
+    [dispatch]
+  );
 
-  const clearLotoListHandler = () =>
+  const clearLotoListHandler = useCallback(() => {
     dispatch({ type: LotoReducerAction.CLEAR_ALL });
+  }, [dispatch]);
 
   return (
     <Container>

@@ -1,3 +1,4 @@
+import { FC, memo } from "react";
 import { Button, ButtonGroup, Col, Row } from "react-bootstrap";
 
 type TiAppLotoHeaderProps = {
@@ -7,13 +8,8 @@ type TiAppLotoHeaderProps = {
   clearLotoList: () => void;
 };
 
-export default function AppLotoHeader({
-  addLotoItem,
-  sortState,
-  isReverseSort,
-  clearLotoList,
-}: TiAppLotoHeaderProps) {
-  return (
+const AppLotoHeader: FC<TiAppLotoHeaderProps> = memo(
+  ({ addLotoItem, sortState, isReverseSort, clearLotoList }) => (
     <Row className="g-4">
       <Col lg={12}>
         <ButtonGroup>
@@ -29,5 +25,7 @@ export default function AppLotoHeader({
         </ButtonGroup>
       </Col>
     </Row>
-  );
-}
+  )
+);
+
+export default AppLotoHeader;

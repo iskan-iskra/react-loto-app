@@ -1,8 +1,9 @@
 import { Button, Container, Stack } from "react-bootstrap";
 import { ThemeTitles } from "../consts";
 import { useTheme } from "../hooks";
+import { memo, FC } from "react";
 
-export default function AppHeader() {
+const AppHeader: FC = memo(() => {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -21,4 +22,6 @@ export default function AppHeader() {
       </Container>
     </header>
   );
-}
+});
+
+export default AppHeader;
